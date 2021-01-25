@@ -22,26 +22,28 @@ export const featuresReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FEATURE:
       return {
-        ...state, 
+        ...state,
         car: {
-          ...state.car, features: [...state.car.features, action.payload]
+          ...state.car,
+          features: [...state.car.features, action.payload],
         },
         additionalPrice: state.additionalPrice + action.payload.price,
-        additionalFeatures: state.additionalFeatures.filter(feature => {
-          return feature !== action.payload
-        })
-      }
+        additionalFeatures: state.additionalFeatures.filter((feature) => {
+          return feature !== action.payload;
+        }),
+      };
     case REMOVE_FEATURE:
       // console.log(action.payload); just testing if the event triggers the action
       return {
-        ...state, 
+        ...state,
         car: {
-          ...state.car, features: state.car.features.filter(feature => {
+          ...state.car,
+          features: state.car.features.filter((feature) => {
             return feature.id !== action.payload.id;
-          })
+          }),
         },
         additionalFeatures: [...state.additionalFeatures, action.payload],
-        additionalPrice: state.additionalPrice - action.payload.price
+        additionalPrice: state.additionalPrice - action.payload.price,
       };
     default:
       return state;
